@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.Entites.ERole;
-import tn.esprit.spring.Entites.Role;
-import tn.esprit.spring.Entites.User;
+import tn.esprit.spring.Entity.ERole;
+import tn.esprit.spring.Entity.Role;
+import tn.esprit.spring.Entity.User;
 import tn.esprit.spring.payload.request.LoginRequest;
 import tn.esprit.spring.payload.request.SignupRequest;
 import tn.esprit.spring.payload.response.JwtResponse;
