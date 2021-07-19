@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt;
+package tn.esprit.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
