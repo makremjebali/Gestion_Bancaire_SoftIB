@@ -15,11 +15,18 @@ public class Versement extends Operation implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Versement(Date date_opertaion, double montant, Compte compte, Historique historique) {
+		super(date_opertaion, montant, compte, historique);
+		// TODO Auto-generated constructor stub
+	}
+
 	public Versement(Date date_opertaion, double montant, Compte compte) {
 		super(date_opertaion, montant, compte);
 		// TODO Auto-generated constructor stub
 	}
 
+
+	
 
 
 

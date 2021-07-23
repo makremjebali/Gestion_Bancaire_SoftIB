@@ -13,13 +13,19 @@ public class CompteCourant extends Compte implements Serializable {
 
 	private double decouvert;
 
-
-
-	public CompteCourant(String compte_identifiant, String type_cpte, Date date_ouverture, double solde, Agence agence,
-			Cartes_Bancaires carteBancaire, Client clients, List<Operation> operations, double decouvert) {
-		super(compte_identifiant, type_cpte, date_ouverture, solde, agence, carteBancaire, clients, operations);
+	public CompteCourant(String compte_identifiant, Date date_ouverture, double solde, double decouvert) {
+		super(compte_identifiant, date_ouverture, solde);
 		this.decouvert = decouvert;
 	}
+
+
+	public CompteCourant(String compte_identifiant, Date date_ouverture, double solde, Agence agence,
+			Cartes_Bancaires carteBancaire, Client clients, double decouvert) {
+		super(compte_identifiant, date_ouverture, solde, agence, carteBancaire, clients);
+		this.decouvert = decouvert;
+	}
+
+
 
 	public CompteCourant() {
 		super();
@@ -36,12 +42,13 @@ public class CompteCourant extends Compte implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CompteCourant [decouvert=" + decouvert + "]";
+		return "CompteCourant [decouvert=" + decouvert + ", getCompte_identifiant()=" + getCompte_identifiant()
+				+ ", getDate_ouverture()=" + getDate_ouverture() + ", getSolde()=" + getSolde() + ", getAgence()="
+				+ getAgence() + ", getCarteBancaire()=" + getCarteBancaire() + ", getClients()=" + getClients()
+				+ ", getOperations()=" + getOperations() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 
 
-
-
-	
 }

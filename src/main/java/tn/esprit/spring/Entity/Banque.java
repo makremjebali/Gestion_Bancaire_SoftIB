@@ -37,6 +37,17 @@ public class Banque implements Serializable{
 		this.agences = agences;
 		this.packProduits = packProduits;
 	}
+	
+	
+
+	public Banque(String nom_Bank, String email, String tel, String fax, String adresse) {
+		super();
+		Nom_Bank = nom_Bank;
+		Email = email;
+		Tel = tel;
+		Fax = fax;
+		Adresse = adresse;
+	}
 
 	public Long getId() {
 		return id;

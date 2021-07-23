@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class PackProduit implements Serializable{
 
@@ -16,6 +18,7 @@ public class PackProduit implements Serializable{
 	private Long id;
 	private String Type_Pack;
 	@ManyToOne
+	@JsonIgnore
 	private Banque banque;
 	public PackProduit() {
 		super();

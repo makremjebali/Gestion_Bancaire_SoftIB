@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Entity.Client;
+import tn.esprit.spring.Entity.User;
 import tn.esprit.spring.repository.ClientRepository;
+import tn.esprit.spring.repository.UserRepository;
 
 
 @Service
 public class ClientService implements IClientService {
 @Autowired
 ClientRepository clientrep;
+@Autowired
+UserRepository userrepository;
 	@Override
 	public List<Client> retrieveAllClients() {
 		// TODO Auto-generated method stub
@@ -20,9 +24,11 @@ ClientRepository clientrep;
 	}
 
 	@Override
-	public Client addClient(Client u) {
+	public Client addClient(Client c,Long IdUser) {
 		// TODO Auto-generated method stub
-		return clientrep.save(u);
+		User u =  userrepository.findById(IdUser).get();
+		c.setUser(u);
+		return clientrep.save(c);
 	}
 
 	@Override

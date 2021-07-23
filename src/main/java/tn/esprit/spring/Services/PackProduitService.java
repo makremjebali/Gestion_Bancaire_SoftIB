@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.Entity.Banque;
 import tn.esprit.spring.Entity.PackProduit;
+import tn.esprit.spring.repository.BanqueRepository;
 import tn.esprit.spring.repository.PackProduitRepository;
 
 
@@ -13,6 +15,8 @@ import tn.esprit.spring.repository.PackProduitRepository;
 public class PackProduitService implements IPackProduitService {
 @Autowired
 PackProduitRepository packrep;
+@Autowired
+BanqueRepository banquerepository;
 	@Override
 	public List<PackProduit> retrieveAllPackProduits() {
 		// TODO Auto-generated method stub
@@ -20,9 +24,11 @@ PackProduitRepository packrep;
 	}
 
 	@Override
-	public PackProduit addPackProduit(PackProduit u) {
+	public PackProduit addPackProduit(PackProduit p,Long IdBanque) {
 		// TODO Auto-generated method stub
-		return packrep.save(u);
+		Banque b = banquerepository.findById(IdBanque).get();
+		p.setBanque(b);
+		return packrep.save(p);
 	}
 
 	@Override

@@ -17,13 +17,30 @@ public class Credit implements Serializable{
 	private Long id;
 	private Float montant;
 	private int duree;
+	private double taux;
+	private double écheances;
 	private String Type_credit;
-	@OneToOne(mappedBy="credit")
+	@OneToOne
 	private Client client;
 	public Credit() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 	public Float getMontant() {
 		return montant;
 	}

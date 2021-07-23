@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Client implements Serializable{
 	
@@ -46,7 +48,7 @@ public class Client implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Intervention> interventions;
 	
-	@OneToOne
+	@OneToOne(mappedBy="client")
 	private Credit credit;
 	
 	@OneToOne
@@ -74,6 +76,15 @@ public class Client implements Serializable{
 		this.comptes = comptes;
 		this.interventions = interventions;
 		this.credit = credit;
+		this.user = user;
+	}
+	
+	
+
+	public Client(String nom_client, Type type_client, User user) {
+		super();
+		Nom_client = nom_client;
+		Type_client = type_client;
 		this.user = user;
 	}
 
@@ -164,7 +175,7 @@ public class Client implements Serializable{
 	public void setFacture(List<Facture> facture) {
 		this.facture = facture;
 	}
-
+	@JsonIgnore
 	public List<Compte> getComptes() {
 		return comptes;
 	}

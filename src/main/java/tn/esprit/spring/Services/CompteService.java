@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tn.esprit.spring.Entity.Agence;
+import tn.esprit.spring.Entity.Client;
 import tn.esprit.spring.Entity.Compte;
 import tn.esprit.spring.Entity.CompteCourant;
 import tn.esprit.spring.Entity.Historique;
 import tn.esprit.spring.Entity.Operation;
 import tn.esprit.spring.Entity.Retrait;
 import tn.esprit.spring.Entity.Versement;
+import tn.esprit.spring.repository.AgenceRepository;
+import tn.esprit.spring.repository.ClientRepository;
 import tn.esprit.spring.repository.CompteRepository;
 import tn.esprit.spring.repository.HistoriqueRepository;
 import tn.esprit.spring.repository.OperationRepository;
@@ -29,6 +33,10 @@ public class CompteService implements ICompteService {
 	OperationRepository operationRepository;
 	@Autowired
 	HistoriqueRepository historiqueRepository;
+	@Autowired
+	AgenceRepository agenceRepository;
+	@Autowired
+	ClientRepository clientRepository;
 	private static final Logger l = LogManager.getLogger(CompteService.class);
 	@Override
 	public Compte consulterCompte(String codecompte) {
@@ -44,11 +52,11 @@ public class CompteService implements ICompteService {
 	public void versement(String codecompte, double montant) {
 		// TODO Auto-generated method stub
 		Compte cpt = consulterCompte(codecompte);
-		Versement ver = new Versement(new Date(), montant, cpt);
-		operationRepository.save(ver);
 		cpt.setSolde(cpt.getSolde()+montant);
 		compteRepository.save(cpt);
-		Historique his = new Historique(new Date(), "versement", "versement", montant, cpt.getSolde());
+		Historique his = new Historique(new Date(), "versement", "versement", montant, cpt.getSolde(),cpt);
+		Versement ver = new Versement(new Date(), montant, cpt, his);
+		operationRepository.save(ver);
 		historiqueRepository.save(his);
 	}
 
@@ -60,11 +68,13 @@ public class CompteService implements ICompteService {
 			facilitesretrait=((CompteCourant)cpt).getDecouvert();
 		if (cpt.getSolde()+facilitesretrait<montant)
 			l.info("solde insuffisant");
-		Retrait ret = new Retrait(new Date(), montant, cpt);
-		operationRepository.save(ret);
+
 		cpt.setSolde(cpt.getSolde()-montant);
 		compteRepository.save(cpt);
-		Historique his = new Historique(new Date(), "retrait", "retrait", montant, cpt.getSolde());
+
+		Historique his = new Historique(new Date(), "retrait", "retrait", montant, cpt.getSolde(),cpt);
+		Retrait ret = new Retrait(new Date(), montant, cpt,his);
+		operationRepository.save(ret);
 		historiqueRepository.save(his);
 	}
 
@@ -78,7 +88,30 @@ public class CompteService implements ICompteService {
 	@Override
 	public List<Operation> listoperation(String codecompte) {
 		// TODO Auto-generated method stub
-		//return operationRepository.listoperation(codecompte);
-		return null;
+		
+		return operationRepository.listoperation(codecompte);
+	}
+
+	@Override
+	public Compte addCompte(Compte c,Long idAgence,Long code_client) {
+		// TODO Auto-generated method stub
+		Agence a = agenceRepository.findById(idAgence).get();
+		Client client = clientRepository.findById(code_client).get();
+		c.setAgence(a);
+		c.setClients(client);
+		c.setDate_ouverture(new Date());
+		return compteRepository.save(c);
+	}
+
+	@Override
+	public List<Compte> listCompte() {
+		// TODO Auto-generated method stub
+		return (List<Compte>) compteRepository.findAll();
+	}
+
+	@Override
+	public Compte GetCompte(String code_cpte) {
+		// TODO Auto-generated method stub
+		return compteRepository.findById(code_cpte).get();
 	}
 }

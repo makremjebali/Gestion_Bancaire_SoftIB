@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("OP")
@@ -45,6 +48,14 @@ public Operation(Date date_opertaion, double montant, Compte compte) {
 	this.montant = montant;
 	this.compte = compte;
 }
+
+public Operation(Date date_opertaion, double montant, Compte compte, Historique historique) {
+	super();
+	this.date_opertaion = date_opertaion;
+	this.montant = montant;
+	this.compte = compte;
+	this.historique = historique;
+}
 public Long getNumero() {
 	return numero;
 }
@@ -63,15 +74,19 @@ public double getMontant() {
 public void setMontant(double montant) {
 	this.montant = montant;
 }
+@JsonIgnore
 public Compte getCompte() {
 	return compte;
 }
+@JsonSetter
 public void setCompte(Compte compte) {
 	this.compte = compte;
 }
+@JsonIgnore
 public Historique getHistorique() {
 	return historique;
 }
+@JsonSetter
 public void setHistorique(Historique historique) {
 	this.historique = historique;
 }

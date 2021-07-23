@@ -3,12 +3,15 @@ package tn.esprit.spring.Entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Agence implements Serializable {
@@ -18,8 +21,10 @@ public class Agence implements Serializable {
 	private Long Agence_identifiant;
 	private String Nom_Agence,Agence_adresse;
 	@OneToMany(mappedBy="agence")
+	@JsonIgnore
 	private List<Compte> comptes;
 	@ManyToOne
+	@JsonIgnore
 	private Banque banque;
 
 	public Agence() {

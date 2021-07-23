@@ -36,6 +36,10 @@ public class Historique implements Serializable{
 	
 	
 
+
+
+
+
 	public Historique(Date date, String description, String typeoperation, double montant, double solde) {
 		super();
 		this.date = date;
@@ -44,6 +48,23 @@ public class Historique implements Serializable{
 		this.montant = montant;
 		Solde = solde;
 	}
+
+
+	public Historique(Date date, String description, String typeoperation, double montant, double solde,
+			Compte compte) {
+		super();
+		
+		this.date = date;
+		this.description = description;
+		this.typeoperation = typeoperation;
+		this.montant = montant;
+		Solde = solde;
+		this.compte = compte;
+	}
+
+
+
+
 
 
 

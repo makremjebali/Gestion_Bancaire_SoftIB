@@ -13,10 +13,6 @@ import tn.esprit.spring.repository.BanqueRepository;
 public class BanqueService implements IBanqueService {
 @Autowired
 BanqueRepository banquerep;
-	@Override
-	public List<Banque> retrieveAllBanques() {
-		return (List<Banque>)banquerep.findAll();
-	}
 
 	@Override
 	public Banque addBanque(Banque u) {
@@ -34,9 +30,5 @@ BanqueRepository banquerep;
 		return banquerep.save(u);
 	}
 
-	@Override
-	public Banque retrieveBanque(Long id) {
-		return banquerep.findById(id).get();
-	}
 
 }

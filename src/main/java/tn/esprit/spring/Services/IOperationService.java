@@ -1,13 +1,14 @@
 package tn.esprit.spring.Services;
 
+import java.util.Date;
 import java.util.List;
 
 import tn.esprit.spring.Entity.Operation;
 
 public interface IOperationService {
-	public List<Operation> retrieveAllOperations();
-	public Operation addOperation(Operation o);
-	public void deleteOperation(Long id);
-	public Operation updateOperation(Operation o);
-	public Operation retrieveOperation(Long id);
+	
+	
+	public List<Operation> getoperation(String codecompte);
+	
+	public double  GetMoyenneDesTransactions(Date datejour);
 }

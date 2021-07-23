@@ -9,11 +9,11 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bezkoder</groupId>
-	<artifactId>spring-boot-security-jwt</artifactId>
+	<groupId>tn.esprit</groupId>
+	<artifactId>Gestion_Bancaire_SoftIB</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-security-jwt</name>
-	<description>Demo project for Spring Boot Security - JWT</description>
+	<name>Gestion_Bancaire_SoftIB</name>
+	<description>Gestion_Bancaire_SoftIB</description>
 
 	<properties>
 		<java.version>1.8</java.version>
