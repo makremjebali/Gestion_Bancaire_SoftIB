@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: Gestion_Bancaire_SoftIB
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Elife-Beja-148
+Built-By: Makrem
 Implementation-Vendor-Id: tn.esprit
 Build-Jdk: 1.8.0_05
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
