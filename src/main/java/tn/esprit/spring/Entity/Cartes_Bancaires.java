@@ -12,7 +12,7 @@ public class Cartes_Bancaires implements Serializable {
 	private int Numero_carte;
 	private int mot_passe;
 	private String duree_de_validite;
-	@OneToOne(mappedBy="carteBancaire")
+	@OneToOne
 	private Compte compte;
 	public Cartes_Bancaires() {
 		super();

@@ -43,7 +43,7 @@ public class CompteService implements ICompteService {
 		Compte cpt =  compteRepository.findById(codecompte).get();
 		if (cpt == null)
 		{
-			l.info("Compte introvable");
+			throw new RuntimeException("Compte introuvable");
 		}
 		return cpt;
 	}
@@ -63,11 +63,11 @@ public class CompteService implements ICompteService {
 	@Override
 	public void retrait(String codecompte, double montant) {
 		Compte cpt = consulterCompte(codecompte);
-		double facilitesretrait=0;
+		double facilitesCaisse=0;
 		if (cpt instanceof CompteCourant)
-			facilitesretrait=((CompteCourant)cpt).getDecouvert();
-		if (cpt.getSolde()+facilitesretrait<montant)
-			l.info("solde insuffisant");
+			facilitesCaisse=((CompteCourant)cpt).getDecouvert();
+		if (cpt.getSolde()+facilitesCaisse<montant)
+			throw new RuntimeException("Solde insuffisant");
 
 		cpt.setSolde(cpt.getSolde()-montant);
 		compteRepository.save(cpt);

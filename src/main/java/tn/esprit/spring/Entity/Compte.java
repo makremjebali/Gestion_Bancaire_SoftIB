@@ -47,7 +47,7 @@ public abstract class Compte implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Agence agence;
 	
-	@OneToOne
+	@OneToOne(mappedBy="compte")
 	private Cartes_Bancaires carteBancaire;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CODE_client")

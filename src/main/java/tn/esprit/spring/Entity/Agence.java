@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +21,10 @@ public class Agence implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Agence_identifiant;
 	private String Nom_Agence,Agence_adresse;
-	@OneToMany(mappedBy="agence")
+	@OneToMany(mappedBy="agence",fetch=FetchType.LAZY)
 	@JsonIgnore
 	private List<Compte> comptes;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonIgnore
 	private Banque banque;
 
@@ -87,14 +88,11 @@ public class Agence implements Serializable {
 		this.comptes = comptes;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Agence [Agence_identifiant=" + Agence_identifiant + ", Nom_Agence=" + Nom_Agence + ", Agence_adresse="
 				+ Agence_adresse + ", comptes=" + comptes + ", banque=" + banque + "]";
 	}
-
-
-	
-	
-
 }

@@ -1,14 +1,21 @@
 package tn.esprit.spring.Services;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.Entity.Compte;
+import tn.esprit.spring.Entity.Contrainte;
 import tn.esprit.spring.Entity.Credit;
 import tn.esprit.spring.repository.CompteRepository;
+import tn.esprit.spring.repository.ContrainteRepository;
 import tn.esprit.spring.repository.CreditRepository;
 
 
@@ -18,37 +25,69 @@ public class CreditService implements ICreditService {
 	CreditRepository creditRepository;
 	@Autowired
 	CompteRepository compteepository;
+	@Autowired
+	ContrainteRepository contrainterepository;
+	@Autowired
+	ContrainteService contrainteservice;
+	@Autowired
+	
+	
 	@Override
-	public void demanderCredit(String CodeCompte, Long CodeClient,Long idCredit) {
+	public String GetTMMFromSitebct() {
+		String TMM="";
+		/*final String url = "https://www.bct.gov.tn/bct/siteprod/tableau_statistique_a.jsp?params=PL203105";
+		try {
+			final Document document =Jsoup.connect(url).get();
+			//l.info(document.outerHtml());
+			for (Element rwo : document.select("div.bct-table-fixed tr"))
+			{
+				if (rwo.select("td.t-right:nth-of-type(7)").text().equals("")){
+					continue;
+				}
+				else {
+					String ticker = rwo.select("td.t-right:nth-of-type(7)").text();
+						if (ticker.equals("6,26000"))
+						{
+							TMM=ticker;
+						}
+							
+				}
+			}
+		}catch(Exception ex){ex.printStackTrace();}*/
+		return TMM;
+	}
+	
+	@Override
+	public void demanderCredit(String CodeCompte, Long CodeClient,Long idCredit,
+			Long idcontrainte,String typecredit) {
 		
-		/*Compte cpte = compteepository.findById(CodeCompte).get();
-		Contrainte cc = conre.findAll();
+		Compte cpte = compteepository.findById(CodeCompte).get();
+		//List<Contrainte> listContrainte = contrainteservice.retrieveAllContrainte();
+		Contrainte cc = contrainterepository.findById(idcontrainte).get();
 		Date d = new Date();
-		DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		DateFormat formatter;
+		formatter = new SimpleDateFormat("yyyy-MM-dd");
 		int d1 = Integer.parseInt(formatter.format(cpte.getClients().getDateNaissance()));
 	    int d2 = Integer.parseInt(formatter.format(d));
 	    int age = (d2 - d1) / 10000;
-		if (cpte.getSolde()<cc.getmontant()&&(age>cc.getAge))
+		if (cpte.getSolde()<cc.getMontant()&&(age>cc.getAge()))
 		{
-			l.into("votre demander a ete refuse par contrainte de age ou bien solde");
+			throw new RuntimeException("votre demander a ete refuse par contrainte de age ou bien solde");
 		}
 		else
 		{
 			
 		Credit credit = creditRepository.findById(idCredit).get();
-		if (credit.getType_credit().equals("sayara cha3biya"))
+		if (typecredit.equals("Crédit immobilier"))
 		{
 			credit.setDuree(84);
 			credit.setMontant(50000F);
-			double TMM,poursont=5;
-			credit.settaux(TMM+poursont);
-			credit.setecheances((credit.getMontant()/84)*credit.settaux);
-			
+			double poursont=5;
+			double TMM=Double.parseDouble(GetTMMFromSitebct()) ;
+			credit.setTaux(TMM+poursont);
+			credit.setÉcheances((credit.getMontant()/84)*credit.getTaux());
 		}
 		}
 			
-		}*/
-
-}
-	
+		}
 }

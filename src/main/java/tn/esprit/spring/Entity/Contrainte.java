@@ -7,12 +7,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Contrainte {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long idcontrainte;
-private String type_contrainte;
-private double Montant;
-private int age ;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idcontrainte;
+	private String type_contrainte;
+	private double Montant;
+	private int age ;
 
 public Contrainte() {
 	super();

@@ -41,6 +41,30 @@ public class Credit implements Serializable{
 
 
 
+	public double getTaux() {
+		return taux;
+	}
+
+
+
+	public void setTaux(double taux) {
+		this.taux = taux;
+	}
+
+
+
+	public double getÉcheances() {
+		return écheances;
+	}
+
+
+
+	public void setÉcheances(double écheances) {
+		this.écheances = écheances;
+	}
+
+
+
 	public Float getMontant() {
 		return montant;
 	}
@@ -65,18 +89,27 @@ public class Credit implements Serializable{
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public Credit(Float montant, int duree, String type_credit, Client client) {
+
+
+
+
+	public Credit(Float montant, int duree, double taux, double écheances, String type_credit) {
 		super();
 		this.montant = montant;
 		this.duree = duree;
+		this.taux = taux;
+		this.écheances = écheances;
 		Type_credit = type_credit;
-		this.client = client;
 	}
+
+
+
 	@Override
 	public String toString() {
-		return "Credit [id=" + id + ", montant=" + montant + ", duree=" + duree + ", Type_credit=" + Type_credit
-				+ ", client=" + client + "]";
+		return "Credit [id=" + id + ", montant=" + montant + ", duree=" + duree + ", taux=" + taux + ", écheances="
+				+ écheances + ", Type_credit=" + Type_credit + ", client=" + client + "]";
 	}
+
 
 	
 }

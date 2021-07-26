@@ -3,17 +3,18 @@ package tn.esprit.spring.Services;
 import java.util.List;
 
 
+
 public interface IStatistiquesService {
 
 	public List<String>  GetNumerosComptePlusGrandSoldeASC();
 	
 	public List<String>  GetNumerosComptePlusPetitSoldeASC();
 	
-	public int GetNombreDecompteParType(); 
+	public List<String> GetNombreDecompteParType(); 
 	
-	public double GetSommeDesCrédits();
+	public Float GetSommeDesCrédits();
 	
-	public double CalculeTMM();
+	public String CalculeTMM();
 	
 	public double GetMoyenneDesSalaires();
 	
