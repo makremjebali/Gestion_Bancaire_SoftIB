@@ -32,7 +32,7 @@ import tn.esprit.spring.Services.IStatistiquesService;
 @SpringBootTest
 public class SpringBootSecurityJwtApplicationTests {
 	private static final Logger l = LogManager.getLogger(SpringBootSecurityJwtApplicationTests.class);
-	@Autowired
+	/*@Autowired
 	ICompteService icompteService;
 	@Autowired
 	IStatistiquesService istatistiquesService;
@@ -43,7 +43,7 @@ public class SpringBootSecurityJwtApplicationTests {
 	@Autowired
 	IClientService iclientService;
 	@Autowired
-	IAgenceService iagenceservice;
+	IAgenceService iagenceservice;*/
 	@Autowired
 	ICreditService icreditservice;
 	@Test
@@ -103,7 +103,7 @@ public class SpringBootSecurityJwtApplicationTests {
 					continue;
 				}
 				else {
-					String ticker = rwo.select("td.t-right:nth-of-type(7)").text();
+				final	String ticker = rwo.select("td.t-right:nth-of-type(7)").text();
 						if (ticker.equals("6,26000"))
 						{
 							TMM=ticker;
@@ -124,6 +124,8 @@ public class SpringBootSecurityJwtApplicationTests {
 		//l.info(istatistiquesService.CalculeTMM());
 		//l.info(iagenceservice.retrieveAllAgences());
 		//icreditservice.demanderCredit("c1", 4, idCredit, idcontrainte, typecredit);
+	
+		//l.info(icreditservice.GetTMMFromSitebct());
 	}
 
 }

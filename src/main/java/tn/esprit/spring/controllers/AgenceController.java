@@ -4,9 +4,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +34,27 @@ public class AgenceController {
 	@GetMapping("/retrieveAllAgence")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
-	public List<Agence> retrieveAllAgence() {
-	
-	return iAgenceService.retrieveAllAgences();
+	public List<Agence> retrieveAllAgences() {
+		return iAgenceService.retrieveAllAgences();
 	}
+
+	@DeleteMapping("/deleteAgence/{idA}")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteAgence(@PathVariable("idA") Long id) {
+		iAgenceService.deleteAgence(id);
+	}
+	@PutMapping(value="/updateAgence/{idA}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public Agence updateAgence(@RequestBody Agence u,@PathVariable ("idA") Long id) {
+		return iAgenceService.updateAgence(u, id);
+	}
+	@GetMapping(value="/retrieveAgence/{idA}")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public Agence retrieveAgence(@PathVariable("idA") Long id) {
+		return iAgenceService.retrieveAgence(id);
+	}
+	
+	
 }

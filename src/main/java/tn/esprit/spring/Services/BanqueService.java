@@ -1,7 +1,5 @@
 package tn.esprit.spring.Services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +24,8 @@ BanqueRepository banquerep;
 	}
 
 	@Override
-	public Banque updateBanque(Banque u) {
+	public Banque updateBanque(Banque u,Long id) {
+		Banque b = banquerep.findById(id).get();
 		return banquerep.save(u);
 	}
 

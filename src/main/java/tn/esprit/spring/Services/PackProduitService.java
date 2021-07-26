@@ -34,6 +34,9 @@ BanqueRepository banquerepository;
 	@Override
 	public void deletePackProduit(Long id) {
 		// TODO Auto-generated method stub
+		PackProduit p = packrep.findById(id).get();
+		p.setBanque(null);
+		packrep.save(p);
 		packrep.deleteById(id);
 	}
 

@@ -38,13 +38,16 @@ private static final Logger l = LogManager.getLogger(AgenceService.class);
 
 	@Override
 	public void deleteAgence(Long id) {
+		Agence a = agencerep.findById(id).get();
+		a.setBanque(null);
+		agencerep.save(a);	
 		agencerep.deleteById(id);
-
 	}
 
 	@Override
-	public Agence updateAgence(Agence u) {
-		return agencerep.save(u);
+	public Agence updateAgence(Agence u,Long id) {
+		Agence a = agencerep.findById(id).get();
+		return agencerep.save(a);
 	}
 
 	@Override

@@ -13,10 +13,10 @@ import tn.esprit.spring.repository.UserRepository;
 
 @Service
 public class ClientService implements IClientService {
-@Autowired
-ClientRepository clientrep;
-@Autowired
-UserRepository userrepository;
+	@Autowired
+	ClientRepository clientrep;
+	@Autowired
+	UserRepository userrepository;
 	@Override
 	public List<Client> retrieveAllClients() {
 		// TODO Auto-generated method stub
@@ -33,13 +33,17 @@ UserRepository userrepository;
 
 	@Override
 	public void deleteClient(Long id) {
+		Client client =clientrep.findById(id).get();
+		client.setUser(null);
+		clientrep.save(client);
 		clientrep.deleteById(id);
 
 	}
 
 	@Override
-	public Client updateClient(Client u) {
+	public Client updateClient(Client u,Long id) {
 		// TODO Auto-generated method stub
+		Client client =clientrep.findById(id).get();
 		return clientrep.save(u);
 	}
 

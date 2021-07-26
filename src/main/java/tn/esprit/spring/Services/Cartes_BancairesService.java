@@ -1,6 +1,5 @@
 package tn.esprit.spring.Services;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,6 @@ public class Cartes_BancairesService implements ICartes_BancairesService {
 		Cartes_Bancaires c =cartebancairerepository.findById(numero_carte).get();
 		c.setMot_passe(mot_passe);
 		cartebancairerepository.save(c);
-		
 		return c;
 	}
 	

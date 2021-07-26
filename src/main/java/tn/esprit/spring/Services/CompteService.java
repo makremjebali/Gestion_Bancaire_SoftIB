@@ -2,6 +2,7 @@ package tn.esprit.spring.Services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,7 @@ import tn.esprit.spring.Entity.Agence;
 import tn.esprit.spring.Entity.Client;
 import tn.esprit.spring.Entity.Compte;
 import tn.esprit.spring.Entity.CompteCourant;
+import tn.esprit.spring.Entity.Facture;
 import tn.esprit.spring.Entity.Historique;
 import tn.esprit.spring.Entity.Operation;
 import tn.esprit.spring.Entity.Retrait;
@@ -22,6 +24,7 @@ import tn.esprit.spring.repository.ClientRepository;
 import tn.esprit.spring.repository.CompteRepository;
 import tn.esprit.spring.repository.HistoriqueRepository;
 import tn.esprit.spring.repository.OperationRepository;
+import tn.esprit.spring.repository.factureRepository;
 
 
 @Service
@@ -37,6 +40,8 @@ public class CompteService implements ICompteService {
 	AgenceRepository agenceRepository;
 	@Autowired
 	ClientRepository clientRepository;
+	@Autowired
+	factureRepository factureRepository;
 	private static final Logger l = LogManager.getLogger(CompteService.class);
 	@Override
 	public Compte consulterCompte(String codecompte) {
@@ -56,8 +61,11 @@ public class CompteService implements ICompteService {
 		compteRepository.save(cpt);
 		Historique his = new Historique(new Date(), "versement", "versement", montant, cpt.getSolde(),cpt);
 		Versement ver = new Versement(new Date(), montant, cpt, his);
+		Long num_Facture = ThreadLocalRandom.current().nextLong(11111111, 99999999);
+		Facture fac = new Facture(num_Facture, new Date(), cpt.getClients());
 		operationRepository.save(ver);
 		historiqueRepository.save(his);
+		factureRepository.save(fac);
 	}
 
 	@Override
@@ -68,14 +76,15 @@ public class CompteService implements ICompteService {
 			facilitesCaisse=((CompteCourant)cpt).getDecouvert();
 		if (cpt.getSolde()+facilitesCaisse<montant)
 			throw new RuntimeException("Solde insuffisant");
-
 		cpt.setSolde(cpt.getSolde()-montant);
 		compteRepository.save(cpt);
-
 		Historique his = new Historique(new Date(), "retrait", "retrait", montant, cpt.getSolde(),cpt);
 		Retrait ret = new Retrait(new Date(), montant, cpt,his);
+		Long num_Facture = ThreadLocalRandom.current().nextLong(11111111, 99999999);
+		Facture fac = new Facture(num_Facture, new Date(), cpt.getClients());
 		operationRepository.save(ret);
 		historiqueRepository.save(his);
+		factureRepository.save(fac);
 	}
 
 	@Override

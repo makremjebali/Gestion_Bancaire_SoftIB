@@ -27,6 +27,7 @@ public class StatistiquesService implements IStatistiquesService {
 	CompteService compteservice;
 	@Autowired
 	CreditService creditservice;
+
 	
 	@Override
 	public List<String> GetNumerosComptePlusGrandSoldeASC() {
@@ -89,6 +90,7 @@ public class StatistiquesService implements IStatistiquesService {
 	public String CalculeTMM() {
 		// TODO Auto-generated method stub
 		return creditservice.GetTMMFromSitebct();
+		//return "";
 	}
 
 	@Override
