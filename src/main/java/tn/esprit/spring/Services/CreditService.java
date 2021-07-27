@@ -1,21 +1,17 @@
 package tn.esprit.spring.Services;
 
 import java.io.IOException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import tn.esprit.spring.Entity.Compte;
 import tn.esprit.spring.Entity.Contrainte;
@@ -26,6 +22,7 @@ import tn.esprit.spring.repository.CreditRepository;
 
 @Service
 public class CreditService implements ICreditService {
+
 	@Autowired
 	CreditRepository creditRepository;
 	@Autowired
@@ -34,53 +31,12 @@ public class CreditService implements ICreditService {
 	ContrainteRepository contrainterepository;
 	@Autowired
 	ContrainteService contrainteservice;
-
-
+	
 	private static final Logger logger = LogManager.getLogger(CreditService.class);
-
-	@Test
-	public String GetTMMFromSitebct() {
-		String TMM = "";
-		Document doc = null;
-		try {
-
-			doc = Jsoup.connect("https://www.bct.gov.tn/bct/siteprod/tableau_statistique_a.jsp?params=PL203105").get();
-
-		} catch (IOException e) {
-
-			logger.error(e.getStackTrace());
-			e.printStackTrace();
-		}
-
-		Elements repositories = doc.getElementsByClass("t-right");
-
-		logger.info("INFO : +Element+ = " + repositories.get(41).text() + " ");
-		TMM = repositories.get(41).text();
-//
-//		for (Element repository : repositories) {
-//			logger.info("INFO : Element = " + repository.text());
-//		}
-
-		return TMM;
-	}
-
-	/*
-	 * final String url =
-	 * "https://www.bct.gov.tn/bct/siteprod/tableau_statistique_a.jsp?params=PL203105";
-	 * try { final Document document =Jsoup.connect(url).get();
-	 * //l.info(document.outerHtml()); for (Element rwo :
-	 * document.select("div.bct-table-fixed tr")) { if
-	 * (rwo.select("td.t-right:nth-of-type(7)").text().equals("")){ continue; }
-	 * else { String ticker = rwo.select("td.t-right:nth-of-type(7)").text(); if
-	 * (ticker.equals("6,26000")) { TMM=ticker; }
-	 * 
-	 * } } }catch(Exception ex){ex.printStackTrace();}
-	 */
-
+	
 	@Override
 	public void demanderCredit(String CodeCompte, Long CodeClient, Long idCredit, Long idcontrainte,
 			String typecredit) {
-
 		Compte cpte = compteepository.findById(CodeCompte).get();
 		// List<Contrainte> listContrainte =
 		// contrainteservice.retrieveAllContrainte();
@@ -123,4 +79,32 @@ public class CreditService implements ICreditService {
 		}
 
 	}
+		
+	
+	@Override
+	public String GetTMMFromSitebct() {
+		String TMM = "";
+		Document doc = null;
+		try {
+
+			doc = Jsoup.connect("https://www.bct.gov.tn/bct/siteprod/tableau_statistique_a.jsp?params=PL203105").get();
+
+		} catch (IOException e) {
+
+			logger.error(e.getStackTrace());
+			e.printStackTrace();
+		}
+
+		Elements repositories = doc.getElementsByClass("t-right");
+
+		logger.info("INFO : +Element+ = " + repositories.get(41).text() + " ");
+		TMM = repositories.get(41).text();
+//
+//		for (Element repository : repositories) {
+//			logger.info("INFO : Element = " + repository.text());
+//		}
+
+		return TMM;
+	}
+	
 }

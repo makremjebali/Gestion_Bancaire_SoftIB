@@ -24,7 +24,6 @@ import tn.esprit.spring.Services.IAgenceService;
 import tn.esprit.spring.Services.IBanqueService;
 import tn.esprit.spring.Services.IClientService;
 import tn.esprit.spring.Services.ICompteService;
-import tn.esprit.spring.Services.ICreditService;
 import tn.esprit.spring.Services.IOperationService;
 import tn.esprit.spring.Services.IStatistiquesService;
 
@@ -43,7 +42,7 @@ public class SpringBootSecurityJwtApplicationTests {
 	@Autowired
 	IClientService iclientService;
 	@Autowired
-	IAgenceService iagenceservice;*/
+	IAgenceService iagenceservice;
 	@Autowired
 	ICreditService icreditservice;
 	@Test
@@ -58,12 +57,12 @@ public class SpringBootSecurityJwtApplicationTests {
 		//icompteService.retrait("c2", 3000);
 		//icompteService.virement("c3", "c1", 575);
 		//l.info(icompteService.listCompte());
-		/*List<Compte> list = new ArrayList<Compte>();list.add(icompteService.consulterCompte("c1"));
+		List<Compte> list = new ArrayList<Compte>();list.add(icompteService.consulterCompte("c1"));
 		
 		for (Compte c:list)
 		{
 			l.info(c);
-		}*/
+		}
 		
 		
 		//l.info(" NumerosComptePlusGrandSolde  "+istatistiquesService.GetNumerosComptePlusGrandSoldeASC());
@@ -92,7 +91,7 @@ public class SpringBootSecurityJwtApplicationTests {
 	
 	@Test
 	public void testwebscrabling() {
-/*		String TMM="";
+		String TMM="";
 		final String url ="https://www.bct.gov.tn/bct/siteprod/tableau_statistique_a.jsp?params=PL203105";
 		try {
 			final Document document =Jsoup.connect(url).get();
@@ -116,7 +115,7 @@ public class SpringBootSecurityJwtApplicationTests {
 		}
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}*/
+		}
 		
 		//l.info(istatistiquesService.GetNombreDecompteParType());
 		//l.info(istatistiquesService.GetNumerosComptePlusGrandSoldeASC());
@@ -127,5 +126,5 @@ public class SpringBootSecurityJwtApplicationTests {
 	
 		//l.info(icreditservice.GetTMMFromSitebct());
 	}
-
+*/
 }
