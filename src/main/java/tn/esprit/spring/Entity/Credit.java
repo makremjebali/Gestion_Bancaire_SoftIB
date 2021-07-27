@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Credit implements Serializable{
 
@@ -21,6 +23,7 @@ public class Credit implements Serializable{
 	private double écheances;
 	private String Type_credit;
 	@OneToOne
+	@JsonIgnore
 	private Client client;
 	public Credit() {
 		super();
@@ -83,6 +86,7 @@ public class Credit implements Serializable{
 	public void setType_credit(String type_credit) {
 		Type_credit = type_credit;
 	}
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}
