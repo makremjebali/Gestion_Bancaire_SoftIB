@@ -61,7 +61,7 @@ public class StatistiquesController {
 	}
 	@GetMapping("/CalculeTMM")
 	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public String CalculeTMM() {
 		return iStatistiquesService.CalculeTMM();
 	}

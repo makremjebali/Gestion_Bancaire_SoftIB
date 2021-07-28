@@ -14,23 +14,24 @@ import tn.esprit.spring.Services.IContrainteService;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/test")
 public class ContrainteControlleur {
 	
 	@Autowired
     IContrainteService icontrainteService;
 
-	@PostMapping(value= "/addContrainte/{Idc}")
+	@PostMapping("/addContrainte")
 	@ResponseBody
-	public void AddContrainte(@RequestBody Contrainte c,@PathVariable("Idc") long idcontrainte) {
-		icontrainteService.AddContrainte(c, idcontrainte);
+	public void AddContrainte(@RequestBody Contrainte c) {
+		icontrainteService.AddContrainte(c);
 	}
 	@PutMapping(value="/ModifierContrainte/{Idc}")
-	public Contrainte UpdateContrainte(@PathVariable ("Idc") long idcontrainte) {
-		return icontrainteService.UpdateContrainte(idcontrainte);
+	@ResponseBody
+	public Contrainte UpdateContrainte(@RequestBody Contrainte c, @PathVariable ("Idc") long idcontrainte) {
+		return icontrainteService.UpdateContrainte(c,idcontrainte);
 	}
 	@DeleteMapping("/deleteContrainte/{idc}")
-	public void DeleteContrainte(@PathVariable ("Idc")  long idcontrainte) {
+	public void DeleteContrainte(@PathVariable ("idc")  long idcontrainte) {
 		icontrainteService.DeleteContrainte(idcontrainte);
 	}
 	

@@ -55,7 +55,7 @@ public class CreditService implements ICreditService {
 
 		logger.info("INFO : +Element+ = " + repositories.get(41).text() + " ");
 		TMM = repositories.get(41).text();
-		TMM.replace(",", ".");
+		TMM.replace(",",".");
 //
 //		for (Element repository : repositories) {
 //			logger.info("INFO : Element = " + repository.text());
@@ -86,8 +86,8 @@ public class CreditService implements ICreditService {
 				credit.setDuree(84);
 				credit.setMontant(70000F);
 				double poursont = 5;
-				//double TMM = Double.parseDouble(GetTMMFromSitebct());
-				double TMM = Double.parseDouble("6.26000");			
+				double TMM = Double.parseDouble(GetTMMFromSitebct());
+				//double TMM = Double.parseDouble("6.26000");			
 				credit.setTaux(TMM + poursont);
 				credit.setÉcheances((credit.getMontant() / 84) * credit.getTaux());
 				credit.setClient(c);
@@ -98,8 +98,8 @@ public class CreditService implements ICreditService {
 				credit.setDuree(100);
 				credit.setMontant(50000F);
 				double poursont = 5;
-				//double TMM = Double.parseDouble(GetTMMFromSitebct());
-				double TMM = Double.parseDouble("6.26000");	
+				double TMM = Double.parseDouble(GetTMMFromSitebct());
+				//double TMM = Double.parseDouble("6.26000");	
 				credit.setTaux(TMM + poursont);
 				credit.setÉcheances((credit.getMontant() / 100) * credit.getTaux());
 				credit.setClient(c);
@@ -109,8 +109,8 @@ public class CreditService implements ICreditService {
 				credit.setDuree(150);
 				credit.setMontant(100000F);
 				double poursont = 5;
-				//double TMM = Double.parseDouble(GetTMMFromSitebct());
-				double TMM = Double.parseDouble("6.26000");	
+				double TMM = Double.parseDouble(GetTMMFromSitebct());
+				//double TMM = Double.parseDouble("6.26000");	
 				credit.setTaux(TMM + poursont);
 				credit.setÉcheances((credit.getMontant() / 150) * credit.getTaux());
 				credit.setClient(c);
@@ -155,6 +155,11 @@ public class CreditService implements ICreditService {
 	@Override
 	public List<Credit> AfficheAllCredit() {
 	
+/*		for (Credit c : creditRepository.findAll())
+			
+		{
+		System.out.println(c);
+		}*/
 		return (List<Credit>)  creditRepository.findAll();
 	}
 	

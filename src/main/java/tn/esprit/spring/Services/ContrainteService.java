@@ -18,9 +18,9 @@ public class ContrainteService implements IContrainteService {
 	
 	private static final Logger l = LogManager.getLogger(Contrainte.class);
 	
-	public void AddContrainte(Contrainte c, long idcontrainte) {
-	Contrainte con=contrainterepository.findById(idcontrainte).get();
-	if(con!=null){
+	public void AddContrainte(Contrainte c) {
+	
+	if(c!=null){
 		
 		l.info("Contrainte existe déja");
 		
@@ -29,9 +29,10 @@ public class ContrainteService implements IContrainteService {
 		
 	}
 
-	public Contrainte UpdateContrainte(long idcontrainte) {
-		Contrainte con=contrainterepository.findById(idcontrainte).get();
-		return contrainterepository.save(con);
+	public Contrainte UpdateContrainte(Contrainte c,long idcontrainte) {
+		c.setIdcontrainte(idcontrainte);
+		
+		return contrainterepository.save(c);
 		
 	}
 
