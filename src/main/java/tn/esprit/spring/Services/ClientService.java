@@ -41,10 +41,10 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public Client updateClient(Client u,Long id) {
+	public Client updateClient(Long id) {
 		// TODO Auto-generated method stub
 		Client client =clientrep.findById(id).get();
-		return clientrep.save(u);
+		return clientrep.save(client);
 	}
 
 	@Override

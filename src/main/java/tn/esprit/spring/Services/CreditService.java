@@ -55,6 +55,7 @@ public class CreditService implements ICreditService {
 
 		logger.info("INFO : +Element+ = " + repositories.get(41).text() + " ");
 		TMM = repositories.get(41).text();
+		TMM.replace(",", ".");
 //
 //		for (Element repository : repositories) {
 //			logger.info("INFO : Element = " + repository.text());

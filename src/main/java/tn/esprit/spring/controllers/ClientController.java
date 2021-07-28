@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +40,22 @@ public class ClientController {
 	public List<Client> retrieveAllClients() {
 	
 	return iClientService.retrieveAllClients();
+	}
+
+	@DeleteMapping("/deleteClient/{idA}")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteClient(@PathVariable("idA")Long id) {
+		iClientService.deleteClient(id);
+	}
+
+	@PutMapping(value="/updateClient/{idA}")
+	public Client updateClient(@PathVariable("idA")Long id) {
+		return iClientService.updateClient(id);
+	}
+    @PutMapping(value="/retrieveClient/{idA}")
+	public Client retrieveClient(@PathVariable("idA")Long id) {
+		return iClientService.retrieveClient(id);
 	}
 	
 }
